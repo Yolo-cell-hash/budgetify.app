@@ -1,0 +1,14 @@
+{
+ "date": "2026-08-09",
+ "reachability": {
+  "site": 200,
+  "robots": 200,
+  "sitemap": 200,
+  "llms.txt": 200,
+  "offline page": 200,
+  "permission page": 200,
+  "sms page": 200,
+  "play listing": 200
+ },
+ "providers": {}
+}
