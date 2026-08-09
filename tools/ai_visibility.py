@@ -7,7 +7,7 @@ Gemini or Perplexity "what's a good offline expense tracker for India?".
 
 ## Why it asks the models directly
 
-The obvious approach — scrape a search engine and see if budgetify.app ranks —
+The obvious approach — scrape a search engine and see if budgetify.dev ranks —
 does not work any more: Google, Bing and DuckDuckGo all return JavaScript
 shells or challenge pages to a plain HTTP client, so any scraper here would be
 broken-by-design and would rot further. More importantly it measures the wrong
@@ -86,7 +86,7 @@ CERT_HINT = (
     "      python3 -m pip install certifi")
 
 BRAND = "budgetify"
-SITE = "https://budgetify.app"
+SITE = "https://budgetify.dev"
 PLAY = "https://play.google.com/store/apps/details?id=com.jayrk.budget_tracker"
 
 # Questions phrased the way a person actually asks, not the way a keyword tool

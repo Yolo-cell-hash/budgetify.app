@@ -110,25 +110,28 @@ Pages served (`/privacy-policy/`, not `/privacy-policy`). That matters —
 the Privacy Policy URL is registered in the Google Play Console, and the
 relative paths inside each page resolve against the trailing slash.
 
-### Two things that are not wired up yet
+### The domain
 
-Both are dashboard tasks, not code, and the site's discovery work is largely
-wasted until they are done:
+The production domain is **`budgetify.dev`**, registered at Name.com on
+2026-08-09. The repository is still named `budgetify.app` — that was an earlier
+choice of domain and the name was left alone deliberately, since renaming the
+repo buys nothing and risks the Vercel integration. Repo name and domain simply
+do not match; that is expected.
 
-1. **`budgetify.app` does not point at Vercel.** The domain is registered but
-   its DNS still resolves to the registrar's parking IP, so nothing is served
-   there. Add the domain in the Vercel project settings and set the DNS record
-   it asks for at the registrar.
-2. **The production deployment is login-protected.** The URL registered as the
-   developer website on the Play listing currently redirects to a Vercel login
-   page, so the public cannot reach the site. Turn off Deployment Protection
-   (or add a public production alias) in the Vercel project settings.
+`.dev` is on the HSTS preload list, so browsers refuse plain HTTP for it
+entirely. There is no http:// fallback to test with — Vercel provisions the
+certificate automatically and everything is https:// from the first request.
 
-Every `<link rel="canonical">`, the `sitemap.xml` entries and the `llms.txt`
-links all point at `https://budgetify.app/` — the intended permanent home. They
-are correct as written and start working the moment the domain resolves. If you
-decide on a different production hostname instead, those three places are what
-needs changing.
+Every `<link rel="canonical">`, the `sitemap.xml` entries, the `Sitemap:` line
+in `robots.txt`, the `llms.txt` links and `SITE` in `tools/ai_visibility.py`
+point at `https://budgetify.dev/`. **Those five places are the whole list** if
+the domain ever changes again — grep for the host and expect 23 hits across
+them.
+
+Deployment Protection must stay **off** for production. With it on, every path
+including `/robots.txt` 302-redirects to a Vercel login page, so no crawler and
+no AI assistant can fetch anything — which silently defeats the entire point of
+the answer pages.
 
 ## Editing
 

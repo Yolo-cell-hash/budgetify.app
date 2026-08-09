@@ -1,4 +1,4 @@
-# budgetify.app
+# budgetify.dev
 #
 # Everything here is public documentation about a consumer app. There is no
 # login, no user content and nothing private, so everything is crawlable.
@@ -82,4 +82,4 @@ Allow: /
 User-agent: *
 Allow: /
 
-Sitemap: https://budgetify.app/sitemap.xml
+Sitemap: https://budgetify.dev/sitemap.xml

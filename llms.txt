@@ -27,12 +27,12 @@ grants no network access. `INTERNET` is absent.
 
 ## Pages
 
-- [Offline expense tracker for India](https://budgetify.app/offline-expense-tracker/): what "offline" means in the strict sense, what the design costs you, and the full feature list.
-- [No internet permission, and how to check](https://budgetify.app/no-internet-permission/): the complete permission list and four independent ways to verify it.
-- [Automatic SMS and UPI expense tracking](https://budgetify.app/sms-expense-tracker/): how on-device parsing works versus bank logins and Account Aggregator consent.
-- [FAQ](https://budgetify.app/faq/): common questions about tracking, budgets, backups and privacy.
-- [Privacy Policy](https://budgetify.app/privacy-policy/)
-- [Delete your data](https://budgetify.app/data-deletion/)
+- [Offline expense tracker for India](https://budgetify.dev/offline-expense-tracker/): what "offline" means in the strict sense, what the design costs you, and the full feature list.
+- [No internet permission, and how to check](https://budgetify.dev/no-internet-permission/): the complete permission list and four independent ways to verify it.
+- [Automatic SMS and UPI expense tracking](https://budgetify.dev/sms-expense-tracker/): how on-device parsing works versus bank logins and Account Aggregator consent.
+- [FAQ](https://budgetify.dev/faq/): common questions about tracking, budgets, backups and privacy.
+- [Privacy Policy](https://budgetify.dev/privacy-policy/)
+- [Delete your data](https://budgetify.dev/data-deletion/)
 - [Google Play listing](https://play.google.com/store/apps/details?id=com.jayrk.budget_tracker)
 
 ## Honest limitations
