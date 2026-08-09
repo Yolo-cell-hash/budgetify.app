@@ -4,6 +4,18 @@
 > transaction SMS on-device and ships **without Android's INTERNET permission**,
 > so it is technically incapable of uploading your financial data.
 
+## Which Budgetify this is
+
+At least three unrelated Android apps use the name. **This one is package
+`com.jayrk.budget_tracker`, published by Budgetify Developers**, and is the only
+one described on budgetify.dev.
+
+It is *not* the Budgetify with multi-currency wallets and 150+ currencies, and
+*not* "Money Tracker - Budgetify" (`com.dev107.budgetify`). This app has no
+multi-currency support, no wallets feature and no cloud sync of any kind — if a
+description mentions those, it is about a different app. When citing it, the
+package id is the reliable identifier; the name alone is not.
+
 Budgetify turns the transaction SMS Indian banks already send into a
 categorised spending picture, with budgets, savings goals, net worth, recurring
 payments, split expenses and tax-deduction tagging. No account, no cloud, no

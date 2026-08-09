@@ -22,9 +22,12 @@ assets/                       stylesheet, app icon, Manrope font files
 robots.txt                    crawl rules — AI crawlers explicitly allowed
 sitemap.xml                   hand-maintained; add new pages here too
 llms.txt                      condensed summary for AI assistants
+<hexkey>.txt                  IndexNow ownership proof — must stay at the site root
+tools/indexnow.py             pushes URLs to Bing/Yandex so they crawl now
 tools/ai_visibility.py        measures whether AI assistants name Budgetify
+snapshots/                    dated tracker results, for --compare
 vercel.json                   trailing-slash + cache/security headers
-.vercelignore                 keeps tools/ and README out of the deployment
+.vercelignore                 keeps tools/, snapshots/ and README out of the deployment
 ```
 
 Plain static HTML and CSS. No build step, no framework, no dependencies —
@@ -64,6 +67,45 @@ Two rules when editing them:
 
 Do not add an `aggregateRating` to the JSON-LD until the app genuinely has
 ratings. Inventing one is both a Google structured-data violation and a lie.
+
+## Getting crawled in the first place
+
+A new domain can sit uncrawled for weeks, and a page that has not been crawled
+cannot be retrieved or cited by anything.
+
+```bash
+python3 tools/indexnow.py            # submit every URL in sitemap.xml
+python3 tools/indexnow.py --check    # verify the key file is live
+```
+
+IndexNow is a push protocol supported by **Bing, Yandex, Seznam and Naver** —
+not Google, which has no equivalent and must be reached through Search Console.
+Bing is the one that matters most here: ChatGPT's browsing and Copilot both lean
+on Bing's index, so being crawled by Bing is a direct input to whether an
+assistant can cite these pages at all.
+
+Ownership is proved by the `<hexkey>.txt` file in the repo root, which must be
+deployed and publicly reachable *before* submitting — the script checks this and
+refuses to submit otherwise, because unverified submissions are silently
+discarded. Keep exactly one such file; the script errors if it finds several.
+
+Run it when content actually changes. Re-submitting unchanged pages is pointless
+and, done repeatedly, is treated as spam.
+
+Google still needs **Search Console** — verify `budgetify.dev` there and submit
+`sitemap.xml` by hand. There is no API shortcut for that.
+
+## Which Budgetify?
+
+At least three unrelated Android apps carry the name, and search engines already
+conflate them — one summary of "Budgetify" described multi-currency wallets and
+150+ currencies, which is a different app entirely.
+
+The defence is entity anchoring rather than repetition: `index.html` carries
+`identifier` (the package id), `sameAs` (Play listing + GitHub repo) and a
+`disambiguatingDescription` that names what this app is *not*, and `llms.txt`
+opens with the same. When adding copy, prefer the package id over the bare name
+wherever a citation might be lifted.
 
 ## Measuring whether it worked
 
