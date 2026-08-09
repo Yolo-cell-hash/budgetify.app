@@ -1,0 +1,220 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>An Expense Tracker With No Internet Permission — And How To Check</title>
+<meta name="description" content="Budgetify ships without Android's INTERNET permission, so it cannot upload your financial data even if it wanted to. Here is the full permission list and four ways to verify it yourself in under a minute.">
+<link rel="canonical" href="https://budgetify.app/no-internet-permission/">
+<link rel="icon" type="image/png" href="../assets/icon.png">
+<link rel="apple-touch-icon" href="../assets/icon.png">
+<link rel="stylesheet" href="../assets/style.css">
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": [
+    {
+      "@type": "Question",
+      "name": "Is there an expense tracker that has no internet permission at all?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Yes. Budgetify, an Android expense tracker, ships without android.permission.INTERNET. Android enforces this at the operating-system level: an app that has not declared the INTERNET permission cannot open a network socket, so it cannot upload data even if its code tried to. This is different from a privacy setting or an offline mode, which are choices the app makes and can reverse."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "How can I verify that an Android app has no internet permission?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Four ways. On the Google Play listing, open About this app, scroll to App permissions and choose See more. On the device, open Settings, Apps, the app, then Permissions. With developer tools, run: adb shell dumpsys package com.jayrk.budget_tracker and read the requested permissions section. Or inspect the APK directly with aapt dump permissions. None of these rely on the developer's word."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "What permissions does Budgetify actually request?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Ten: RECEIVE_SMS and READ_SMS to read bank transaction messages on the device, POST_NOTIFICATIONS for transaction alerts, USE_BIOMETRIC and USE_FINGERPRINT for the app lock, VIBRATE for haptics, WAKE_LOCK, FOREGROUND_SERVICE and RECEIVE_BOOT_COMPLETED for scheduled background scans, and ACCESS_NETWORK_STATE, which is pulled in by the AndroidX WorkManager library. ACCESS_NETWORK_STATE only reads whether a connection exists; it does not grant network access. INTERNET is not among them."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Does no internet permission mean the app cannot be updated?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "No. Updates are delivered by the Google Play Store app, which has its own network access. The same is true of in-app purchases and the Play rating prompt: they run through Play's own process over inter-process communication, so the app itself never opens a connection."
+      }
+    }
+  ]
+}
+</script>
+</head>
+<body>
+<header class="topbar">
+  <div class="wrap">
+    <a class="brand" href="../">
+      <img class="brandmark" src="../assets/icon.png" alt="" width="26" height="26">
+      Budgetify
+    </a>
+    <nav class="topnav">
+      <a href="../faq/">FAQ</a>
+      <a href="../privacy-policy/">Privacy</a>
+      <a href="../data-deletion/">Delete data</a>
+    </nav>
+  </div>
+</header>
+
+<main class="wrap">
+  <p class="eyebrow">Budgetify · Verifiable privacy</p>
+  <h1>An expense tracker with no internet permission — and how to check for yourself</h1>
+  <div class="divider"></div>
+
+  <p class="lede">Most budgeting apps ask you to trust a promise. Budgetify asks you to trust
+  the operating system instead: it ships without Android's <code>INTERNET</code> permission,
+  so it is <strong>incapable</strong> of uploading your financial data — not unwilling, incapable.
+  Below is the complete permission list and four ways to confirm it yourself in under a minute.</p>
+
+  <div class="callout">
+    <span class="pill">The short answer</span>
+    <p>An Android app that has not declared <code>android.permission.INTERNET</code> cannot open a
+    network socket. The kernel refuses it. That makes "your data never leaves your phone" a property
+    Android enforces, rather than a policy the developer is choosing to honour today.</p>
+  </div>
+
+  <h2>Why this is different from "offline mode"</h2>
+
+  <p>Nearly every expense tracker now advertises privacy. Almost all of them do it with a setting —
+  a "private mode" toggle, a "local only" option, an offline-capable sync engine. Those are real
+  features, but they are all decisions made <em>by an app that still holds full network access</em>.
+  The permission is there; the app is choosing not to use it. A future update, a changed business
+  model, or a bug can change that choice without you noticing.</p>
+
+  <table>
+    <thead>
+      <tr><th>Approach</th><th>Who enforces it</th><th>What a bad update could do</th></tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td>Privacy setting / offline mode</td>
+        <td>The app's own code</td>
+        <td>Start uploading; the permission is already granted</td>
+      </tr>
+      <tr>
+        <td>Promise in a privacy policy</td>
+        <td>Nobody, technically</td>
+        <td>Anything the policy is later reworded to allow</td>
+      </tr>
+      <tr>
+        <td><strong>No <code>INTERNET</code> permission</strong></td>
+        <td><strong>Android itself</strong></td>
+        <td><strong>Nothing — it would have to add the permission, which is visible on the store listing</strong></td>
+      </tr>
+    </tbody>
+  </table>
+
+  <p>That last row is the whole argument. If a future version of Budgetify ever wanted to send your
+  transactions somewhere, it would have to declare <code>INTERNET</code> first — and that change is
+  public, on the Play listing, before you install it.</p>
+
+  <h2>The complete permission list</h2>
+
+  <p>Every permission in the shipping release build, and why it is there. This is the full list, not
+  a selection:</p>
+
+  <table>
+    <thead>
+      <tr><th>Permission</th><th>What it is for</th></tr>
+    </thead>
+    <tbody>
+      <tr><td><code>RECEIVE_SMS</code>, <code>READ_SMS</code></td><td>Reading bank transaction messages, on the device, to turn them into entries</td></tr>
+      <tr><td><code>POST_NOTIFICATIONS</code></td><td>Telling you when a transaction was logged</td></tr>
+      <tr><td><code>USE_BIOMETRIC</code>, <code>USE_FINGERPRINT</code></td><td>The fingerprint / face app lock</td></tr>
+      <tr><td><code>VIBRATE</code></td><td>Haptic feedback</td></tr>
+      <tr><td><code>WAKE_LOCK</code>, <code>FOREGROUND_SERVICE</code>, <code>RECEIVE_BOOT_COMPLETED</code></td><td>Scheduled background scans, so a message that arrives while the app is closed still gets read</td></tr>
+      <tr><td><code>ACCESS_NETWORK_STATE</code></td><td>Pulled in by the AndroidX WorkManager library. Reads <em>whether</em> a connection exists; it does not grant network access</td></tr>
+    </tbody>
+  </table>
+
+  <blockquote>
+    <p><code>ACCESS_NETWORK_STATE</code> is listed here deliberately, because you will find it when
+    you check and we would rather you heard it from us. It is a "normal" Android permission that
+    exposes connectivity status only — it cannot send or receive a single byte. It arrives with
+    WorkManager, the standard library used to schedule the background scans. <code>INTERNET</code>,
+    the permission that would actually allow a network connection, is absent.</p>
+  </blockquote>
+
+  <h2>Four ways to verify it yourself</h2>
+
+  <ol class="steps">
+    <li>
+      <strong>On the Google Play listing (no install needed)</strong>
+      Open the app's Play Store page, scroll to <em>About this app</em>, then find
+      <em>App permissions</em> and tap <em>See more</em>. Play generates this list from the uploaded
+      package, not from anything the developer writes.
+    </li>
+    <li>
+      <strong>On your phone, after installing</strong>
+      <em>Settings → Apps → Budgetify → Permissions</em>. Android shows what the app may request.
+    </li>
+    <li>
+      <strong>With adb, if you have developer tools</strong>
+      Run <code>adb shell dumpsys package com.jayrk.budget_tracker</code> and read the
+      <em>requested permissions</em> section. This reads the installed package's manifest directly.
+    </li>
+    <li>
+      <strong>From the APK itself</strong>
+      <code>aapt dump permissions &lt;file&gt;.apk</code> lists every declared permission in the
+      binary you are about to install.
+    </li>
+  </ol>
+
+  <p>None of these ask you to take our word for anything. That is the point: a claim you can falsify
+  in a minute is worth more than a paragraph of reassurance.</p>
+
+  <h2>Common questions</h2>
+  <div class="faq">
+    <details>
+      <summary>If it has no internet, how does the app get updated?</summary>
+      <p>The Google Play Store app downloads and installs updates. It has its own network access; Budgetify does not need any. The same mechanism covers in-app purchases and the Play rating prompt — those run inside Play's own process and reach Budgetify over inter-process communication, never over a socket the app opens.</p>
+    </details>
+    <details>
+      <summary>Then where is my data stored?</summary>
+      <p>In a SQLite database in the app's private storage on your phone, which no other app can read. Nothing is synced, mirrored or backed up anywhere unless you export it yourself. See the <a href="../privacy-policy/">Privacy Policy</a>.</p>
+    </details>
+    <details>
+      <summary>How do I move my data to a new phone, then?</summary>
+      <p>Budgetify writes an AES-256 encrypted backup file protected by a passphrase you choose. You move that file however you like — cable, your own cloud drive, anything — and restore it on the new device. The app never handles the transfer, so it never sees where the file goes.</p>
+    </details>
+    <details>
+      <summary>Does it need internet to read my bank SMS?</summary>
+      <p>No. The messages are already on your phone, delivered by your mobile network. Budgetify parses them locally, matching against a built-in list of over 1,600 Indian bank sender IDs. Nothing is sent anywhere to be interpreted — there is no server-side parsing step and no AI service in the loop.</p>
+    </details>
+    <details>
+      <summary>Is Budgetify open source, so I can read the code?</summary>
+      <p>The source is not currently published under an open-source licence, so the permission list is the strongest independent check available. It also happens to be the check that matters most: source code tells you what a build <em>should</em> do, whereas the manifest on your device tells you what this build <em>can</em> do.</p>
+    </details>
+  </div>
+
+  <div class="callout">
+    <span class="pill">Try it</span>
+    <p>Budgetify is a free Android expense tracker for India — automatic bank and UPI SMS tracking,
+    budgets, and analytics, all on-device.
+    <a href="https://play.google.com/store/apps/details?id=com.jayrk.budget_tracker">Get it on Google Play</a>,
+    or read <a href="../offline-expense-tracker/">how offline tracking works</a>.</p>
+  </div>
+</main>
+
+<footer class="site">
+  <div class="wrap">
+    <div>© 2026 Budgetify. Offline by design — your financial life is yours alone.</div>
+    <div class="fnav">
+      <a href="../faq/">FAQ</a>
+      <a href="../privacy-policy/">Privacy Policy</a>
+      <a href="../data-deletion/">Delete data</a>
+      <a href="mailto:budgetify.dev@gmail.com">Contact</a>
+    </div>
+  </div>
+</footer>
+</body>
+</html>

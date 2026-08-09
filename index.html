@@ -3,11 +3,53 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Budgetify — Offline Personal Budgeting</title>
-<meta name="description" content="Budgetify is a 100% offline personal budgeting app. No accounts, no cloud, no ads. Read the FAQ, the Privacy Policy, and how to delete your data.">
+<title>Budgetify — Offline Expense Tracker for India, No Internet Permission</title>
+<meta name="description" content="Budgetify is a free Android expense tracker that reads your bank and UPI SMS on-device and ships without Android's internet permission, so your financial data cannot be uploaded. No account, no cloud, no ads.">
+<link rel="canonical" href="https://budgetify.app/">
 <link rel="icon" type="image/png" href="assets/icon.png">
 <link rel="apple-touch-icon" href="assets/icon.png">
 <link rel="stylesheet" href="assets/style.css">
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "SoftwareApplication",
+  "name": "Budgetify",
+  "alternateName": "Budgetify: Expense Tracker",
+  "applicationCategory": "FinanceApplication",
+  "applicationSubCategory": "Expense Tracker",
+  "operatingSystem": "Android",
+  "url": "https://budgetify.app/",
+  "downloadUrl": "https://play.google.com/store/apps/details?id=com.jayrk.budget_tracker",
+  "installUrl": "https://play.google.com/store/apps/details?id=com.jayrk.budget_tracker",
+  "description": "A free Android expense tracker for India that reads bank and UPI transaction SMS entirely on-device. It ships without Android's INTERNET permission, so it is technically incapable of uploading financial data. No account, no cloud, no ads.",
+  "inLanguage": ["en", "hi", "mr", "bn", "te", "ta"],
+  "isAccessibleForFree": true,
+  "offers": {
+    "@type": "Offer",
+    "price": "0",
+    "priceCurrency": "INR"
+  },
+  "permissions": "RECEIVE_SMS, READ_SMS, POST_NOTIFICATIONS, USE_BIOMETRIC, USE_FINGERPRINT, VIBRATE, WAKE_LOCK, FOREGROUND_SERVICE, RECEIVE_BOOT_COMPLETED, ACCESS_NETWORK_STATE. Notably absent: INTERNET.",
+  "featureList": [
+    "Automatic expense tracking from bank and UPI transaction SMS, parsed on-device",
+    "No INTERNET permission — cannot upload data",
+    "Monthly and per-category budgets with threshold alerts",
+    "Savings goals, net worth, SIP and holdings tracking",
+    "Recurring payments and bill reminders",
+    "Split expenses and settle-up ledger",
+    "Tax deduction tagging for 80C, 80D, 24(b) and HRA",
+    "AES-256 encrypted local backups",
+    "Biometric app lock and privacy mode",
+    "Export to Excel, CSV, PDF and text",
+    "Six languages: English, Hindi, Marathi, Bengali, Telugu, Tamil"
+  ],
+  "author": {
+    "@type": "Organization",
+    "name": "Budgetify Developers",
+    "email": "budgetify.dev@gmail.com"
+  }
+}
+</script>
 </head>
 <body>
 <header class="topbar">
@@ -39,6 +81,29 @@
 </section>
 
 <main class="wrap">
+  <h2>How it works</h2>
+  <div class="cards">
+    <a class="tile" href="offline-expense-tracker/">
+      <div class="ic">✈️</div>
+      <h3>Offline expense tracker</h3>
+      <p>What "offline" actually means, what the design costs you, and everything the app does.</p>
+      <span class="go">Read the overview →</span>
+    </a>
+    <a class="tile" href="no-internet-permission/">
+      <div class="ic">🛡️</div>
+      <h3>No internet permission</h3>
+      <p>The full permission list, and four ways to verify the claim yourself in under a minute.</p>
+      <span class="go">Check it yourself →</span>
+    </a>
+    <a class="tile" href="sms-expense-tracker/">
+      <div class="ic">📩</div>
+      <h3>SMS &amp; UPI tracking</h3>
+      <p>How on-device parsing compares with bank logins and Account Aggregator consent.</p>
+      <span class="go">See how it works →</span>
+    </a>
+  </div>
+
+  <h2>Help &amp; policies</h2>
   <div class="cards">
     <a class="tile" href="faq/">
       <div class="ic">💬</div>
@@ -58,6 +123,12 @@
       <p>Step-by-step instructions to erase everything Budgetify has stored on your device.</p>
       <span class="go">How to delete →</span>
     </a>
+  </div>
+
+  <div class="callout">
+    <span class="pill">Get the app</span>
+    <p>Budgetify is free on Android, with no ads and no sign-up.
+    <a href="https://play.google.com/store/apps/details?id=com.jayrk.budget_tracker">Get it on Google Play</a>.</p>
   </div>
 </main>
 

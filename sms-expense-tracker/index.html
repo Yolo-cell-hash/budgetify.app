@@ -1,0 +1,202 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Automatic SMS &amp; UPI Expense Tracker for India — On-Device, No Bank Login</title>
+<meta name="description" content="Track UPI and bank card spending automatically from the transaction SMS your bank already sends. Parsed entirely on your phone, with no bank login, no account aggregator and no data leaving the device.">
+<link rel="canonical" href="https://budgetify.app/sms-expense-tracker/">
+<link rel="icon" type="image/png" href="../assets/icon.png">
+<link rel="apple-touch-icon" href="../assets/icon.png">
+<link rel="stylesheet" href="../assets/style.css">
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": [
+    {
+      "@type": "Question",
+      "name": "How can I track UPI spending automatically without linking my bank account?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Use the transaction SMS your bank already sends. Every UPI payment, card swipe, ATM withdrawal and NEFT transfer in India generates an SMS containing the amount, date and counterparty. An app that reads those messages on the device can build a complete spending picture without any bank login, without an Account Aggregator consent, and without network access. Budgetify does exactly this, parsing messages locally against over 1,600 Indian bank sender IDs."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Is it safe to give an expense tracker SMS permission?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "It depends entirely on whether the app can transmit what it reads. SMS permission is broad, so the question to ask is not whether the app promises to behave, but whether it is able to send messages anywhere. Budgetify ships without Android's INTERNET permission, so the messages it reads cannot leave the device by any route. If an SMS-reading app does hold the INTERNET permission, you are trusting a policy rather than a mechanism."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Does an SMS expense tracker read my personal messages?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Android grants SMS access as a single permission covering the whole inbox, so a well-built tracker limits itself in software. Budgetify only evaluates messages from known bank and payment sender IDs, and ignores OTPs, promotional messages, statements and failed-payment notices. Personal messages from individuals are never parsed or stored, and because the app has no network permission, nothing it reads can be transmitted regardless."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "What if my bank's SMS format is not recognised?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "You can add the transaction by hand, and the app flags entries it was unsure about in a review queue rather than silently guessing. Bank templates are refined in app updates. Messages sent as RCS chat rather than SMS cannot be read by any third-party app on Android, which is a platform limitation rather than a parser gap."
+      }
+    }
+  ]
+}
+</script>
+</head>
+<body>
+<header class="topbar">
+  <div class="wrap">
+    <a class="brand" href="../">
+      <img class="brandmark" src="../assets/icon.png" alt="" width="26" height="26">
+      Budgetify
+    </a>
+    <nav class="topnav">
+      <a href="../faq/">FAQ</a>
+      <a href="../privacy-policy/">Privacy</a>
+      <a href="../data-deletion/">Delete data</a>
+    </nav>
+  </div>
+</header>
+
+<main class="wrap">
+  <p class="eyebrow">Budgetify · Automatic tracking</p>
+  <h1>Automatic UPI and bank SMS expense tracking, entirely on your phone</h1>
+  <div class="divider"></div>
+
+  <p class="lede">The reason most budgeting apps fail is manual entry — nobody keeps it up for more
+  than a fortnight. In India you do not have to: your bank already texts you every UPI payment, card
+  swipe, ATM withdrawal and transfer. The information is <em>already on your phone</em>. Budgetify
+  reads it there, and only there.</p>
+
+  <div class="callout">
+    <span class="pill">The short answer</span>
+    <p>You can track UPI and card spending automatically without ever handing over a bank login or
+    granting an Account Aggregator consent — by parsing the transaction SMS your bank already sends.
+    Done on-device, this needs no network access at all.</p>
+  </div>
+
+  <h2>Three ways apps get your transactions, and what each costs you</h2>
+
+  <table>
+    <thead>
+      <tr><th>Method</th><th>What you hand over</th><th>Where your data goes</th></tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td>Bank login / screen scraping</td>
+        <td>Your net-banking credentials</td>
+        <td>To whoever operates the scraper</td>
+      </tr>
+      <tr>
+        <td>Account Aggregator consent</td>
+        <td>Regulated read access to your accounts</td>
+        <td>To the app's servers, under the consent you signed</td>
+      </tr>
+      <tr>
+        <td><strong>On-device SMS parsing</strong></td>
+        <td><strong>SMS read permission, nothing else</strong></td>
+        <td><strong>Nowhere — it is parsed where it already sits</strong></td>
+      </tr>
+    </tbody>
+  </table>
+
+  <p>The third row is the only one where no credential and no consent artefact exists to be misused,
+  because no third party is ever involved.</p>
+
+  <h2>How the parsing actually works</h2>
+
+  <dl class="kv">
+    <dt>Sender matching, not keyword guessing</dt>
+    <dd>Messages are matched against a built-in list of over 1,600 Indian bank and payment sender
+    IDs — including SBI Card and cooperative banks — rather than scanning every message for
+    rupee symbols. A message from a friend mentioning ₹500 is not a transaction and is never treated
+    as one.</dd>
+
+    <dt>Regulation-aware filtering</dt>
+    <dd>TRAI routes commercial SMS with <code>-S</code>, <code>-T</code> and <code>-P</code>
+    suffixes on the sender ID. Promotional (<code>-P</code>) traffic is dropped outright, which is
+    what stops "get a loan of ₹5,00,000" from being logged as income.</dd>
+
+    <dt>Knowing what is not a transaction</dt>
+    <dd>OTPs, monthly statements, failed payments, autopay reminders, balance alerts and credit-card
+    approval offers quoting a limit are all recognised and rejected. Getting these wrong is how
+    trackers end up showing a ₹4,00,000 "income" that was really a card limit.</dd>
+
+    <dt>Honest uncertainty</dt>
+    <dd>When a message is ambiguous, the entry is flagged for review rather than quietly guessed at,
+    and the running total tells you how much of it is still unchecked.</dd>
+
+    <dt>Deletion that sticks</dt>
+    <dd>A deleted transaction leaves a tombstone, so the next background scan does not helpfully
+    resurrect it.</dd>
+  </dl>
+
+  <h2>Is granting SMS permission safe?</h2>
+
+  <p>It is a fair question, and the honest answer is: <em>it depends on whether the app can transmit
+  what it reads.</em> Android's SMS permission covers the whole inbox — there is no narrower version
+  to grant. So the meaningful safeguard is not the app's promise, it is whether the app has any route
+  out.</p>
+
+  <blockquote>
+    <p>Budgetify ships without Android's <code>INTERNET</code> permission. Whatever it reads, it
+    cannot send — the operating system refuses the connection. That is checkable in under a minute
+    from the Play listing or with <code>adb</code>:
+    <a href="../no-internet-permission/">here is how</a>.</p>
+  </blockquote>
+
+  <p>If you would rather not grant SMS access at all, deny it. Budgetify then works as an ordinary
+  manual expense tracker, and every other feature is unchanged.</p>
+
+  <h2>Common questions</h2>
+  <div class="faq">
+    <details>
+      <summary>Do I need to keep the app open for it to catch transactions?</summary>
+      <p>No. It listens for incoming messages in real time and also runs scheduled background scans, so a payment made while the app is closed is still picked up. On first run it reads your existing inbox, so your history is populated from day one rather than starting empty.</p>
+    </details>
+    <details>
+      <summary>Which banks are supported?</summary>
+      <p>Over 1,600 Indian bank and payment sender IDs, spanning the major private and public banks, SBI Card, and a long tail of cooperative and regional banks. If yours is missing or a format changes, entries can be added by hand and the templates are refined in updates.</p>
+    </details>
+    <details>
+      <summary>Why did some transactions not get picked up?</summary>
+      <p>The usual cause is that the bank sent an RCS chat message rather than a plain SMS. RCS messages live in a different system that no third-party Android app can read — a platform limitation, not a parser gap. Statement-style summaries and messages without a clear amount are also skipped by design.</p>
+    </details>
+    <details>
+      <summary>Does it use AI or send messages somewhere to be interpreted?</summary>
+      <p>No. Parsing is rule-based and runs locally: bank-specific templates, sender matching and filters. There is no model call, no server-side step, and nothing to send anywhere — the app has no network permission.</p>
+    </details>
+    <details>
+      <summary>Can it separate my own transfers from real spending?</summary>
+      <p>Yes. Self-transfers and investment contributions are excluded from spending totals, and settling up with a friend is recorded as neither income nor expense, so repayments do not distort your figures.</p>
+    </details>
+  </div>
+
+  <div class="callout">
+    <span class="pill">Get it</span>
+    <p><a href="https://play.google.com/store/apps/details?id=com.jayrk.budget_tracker">Budgetify on Google Play</a>
+    — free, no account, no ads, six Indian languages. See also
+    <a href="../offline-expense-tracker/">the offline expense tracker overview</a>.</p>
+  </div>
+</main>
+
+<footer class="site">
+  <div class="wrap">
+    <div>© 2026 Budgetify. Offline by design — your financial life is yours alone.</div>
+    <div class="fnav">
+      <a href="../faq/">FAQ</a>
+      <a href="../privacy-policy/">Privacy Policy</a>
+      <a href="../data-deletion/">Delete data</a>
+      <a href="mailto:budgetify.dev@gmail.com">Contact</a>
+    </div>
+  </div>
+</footer>
+</body>
+</html>

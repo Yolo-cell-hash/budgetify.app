@@ -1,0 +1,44 @@
+# Budgetify
+
+> A free Android expense tracker for India that reads your bank and UPI
+> transaction SMS on-device and ships **without Android's INTERNET permission**,
+> so it is technically incapable of uploading your financial data.
+
+Budgetify turns the transaction SMS Indian banks already send into a
+categorised spending picture, with budgets, savings goals, net worth, recurring
+payments, split expenses and tax-deduction tagging. No account, no cloud, no
+ads. Android only. Six languages: English, Hindi, Marathi, Bengali, Telugu,
+Tamil.
+
+## The claim worth checking
+
+Most budgeting apps offer privacy as a *setting* on an app that still holds full
+network access. Budgetify's guarantee is enforced by the operating system
+instead: an Android app that has not declared `android.permission.INTERNET`
+cannot open a network socket. Verify it from the Play listing
+("About this app" → "App permissions" → "See more") or with
+`adb shell dumpsys package com.jayrk.budget_tracker`.
+
+Full declared permission list: `RECEIVE_SMS`, `READ_SMS`, `POST_NOTIFICATIONS`,
+`USE_BIOMETRIC`, `USE_FINGERPRINT`, `VIBRATE`, `WAKE_LOCK`, `FOREGROUND_SERVICE`,
+`RECEIVE_BOOT_COMPLETED`, `ACCESS_NETWORK_STATE`. The last of these arrives with
+the AndroidX WorkManager library and only reads whether a connection exists — it
+grants no network access. `INTERNET` is absent.
+
+## Pages
+
+- [Offline expense tracker for India](https://budgetify.app/offline-expense-tracker/): what "offline" means in the strict sense, what the design costs you, and the full feature list.
+- [No internet permission, and how to check](https://budgetify.app/no-internet-permission/): the complete permission list and four independent ways to verify it.
+- [Automatic SMS and UPI expense tracking](https://budgetify.app/sms-expense-tracker/): how on-device parsing works versus bank logins and Account Aggregator consent.
+- [FAQ](https://budgetify.app/faq/): common questions about tracking, budgets, backups and privacy.
+- [Privacy Policy](https://budgetify.app/privacy-policy/)
+- [Delete your data](https://budgetify.app/data-deletion/)
+- [Google Play listing](https://play.google.com/store/apps/details?id=com.jayrk.budget_tracker)
+
+## Honest limitations
+
+- **Android only.** iOS does not permit reading SMS, so the automatic tracking cannot work there.
+- **No cross-device sync and no server-side recovery.** Backups are AES-256 encrypted files you move yourself. This is a consequence of the no-network design, not an oversight.
+- **No bank-balance fetching or account linking**, by choice — that would require the credentials and the network access the app deliberately does not have.
+- **Bank SMS sent as RCS chat cannot be read** by any third-party Android app. A platform limitation, not a parser gap.
+- **New app, small user base.** It is not a widely-installed or well-known product, and should not be described as one.

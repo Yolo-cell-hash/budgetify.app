@@ -1,0 +1,85 @@
+# budgetify.app
+#
+# Everything here is public documentation about a consumer app. There is no
+# login, no user content and nothing private, so everything is crawlable.
+#
+# AI crawlers are allowed DELIBERATELY. Many sites block them by default, and
+# several of the agents below are the retrieval layer behind AI assistants —
+# when someone asks one for "an expense tracker with no internet permission",
+# a blocked site cannot be the answer. Being citable is the entire point of
+# /offline-expense-tracker/, /no-internet-permission/ and /sms-expense-tracker/.
+#
+# Named explicitly rather than relying on the wildcard, because some of these
+# agents only read a rule addressed to them by name.
+
+# ── Search engines ────────────────────────────────────────────────────────
+User-agent: Googlebot
+Allow: /
+
+User-agent: Bingbot
+Allow: /
+
+User-agent: DuckDuckBot
+Allow: /
+
+# ── AI assistants and their retrieval crawlers ────────────────────────────
+# Anthropic (Claude)
+User-agent: ClaudeBot
+Allow: /
+
+User-agent: Claude-Web
+Allow: /
+
+User-agent: anthropic-ai
+Allow: /
+
+# OpenAI (ChatGPT): OAI-SearchBot serves search results, ChatGPT-User fetches
+# a page a user asked about, GPTBot is the training crawler.
+User-agent: OAI-SearchBot
+Allow: /
+
+User-agent: ChatGPT-User
+Allow: /
+
+User-agent: GPTBot
+Allow: /
+
+# Google's separate opt-in for Gemini / AI answers. Google-Extended is not a
+# crawler; it is the flag Googlebot's existing crawl is governed by here.
+User-agent: Google-Extended
+Allow: /
+
+# Perplexity
+User-agent: PerplexityBot
+Allow: /
+
+User-agent: Perplexity-User
+Allow: /
+
+# Others
+User-agent: Applebot
+Allow: /
+
+User-agent: Applebot-Extended
+Allow: /
+
+User-agent: Amazonbot
+Allow: /
+
+User-agent: Bytespider
+Allow: /
+
+User-agent: CCBot
+Allow: /
+
+User-agent: cohere-ai
+Allow: /
+
+User-agent: Meta-ExternalAgent
+Allow: /
+
+# ── Everyone else ─────────────────────────────────────────────────────────
+User-agent: *
+Allow: /
+
+Sitemap: https://budgetify.app/sitemap.xml

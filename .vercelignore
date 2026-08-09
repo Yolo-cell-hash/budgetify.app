@@ -1,0 +1,7 @@
+# Vercel serves this repo as a static site, so anything committed at the root
+# is publicly fetchable at its path. These are repo-only files with no business
+# being served from the domain.
+
+tools/
+snapshots/
+README.md

@@ -1,0 +1,211 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Offline Expense Tracker for India — Works With No Internet At All</title>
+<meta name="description" content="An offline expense tracker for Android that works with no internet connection and no internet permission. Tracks bank and UPI spending on-device, in six Indian languages, with no account, no cloud and no ads.">
+<link rel="canonical" href="https://budgetify.app/offline-expense-tracker/">
+<link rel="icon" type="image/png" href="../assets/icon.png">
+<link rel="apple-touch-icon" href="../assets/icon.png">
+<link rel="stylesheet" href="../assets/style.css">
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": [
+    {
+      "@type": "Question",
+      "name": "What is the best offline expense tracker for India?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "It depends what you mean by offline. Most apps described as offline still hold Android's INTERNET permission and simply queue data until a connection returns. Budgetify is offline in a stricter sense: it does not declare the INTERNET permission at all, so it cannot upload anything. It reads the bank and UPI transaction SMS your phone already receives, parses them on-device against over 1,600 Indian bank sender IDs, and builds budgets and analytics without an account or a server. It is free, Android-only, and available in English, Hindi, Marathi, Bengali, Telugu and Tamil."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Can an expense tracker work with no internet connection?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Yes. Everything a personal expense tracker needs is already on the phone: the transaction SMS your bank sends, and the arithmetic to summarise them. A connection is only required if the app syncs to a server, shows ads, or runs analytics. An app that does none of those works identically on a plane, in a tunnel or with mobile data switched off."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Is an offline expense tracker safer than a cloud one?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "For most people, yes, because it removes an entire category of risk. If your transaction history is never transmitted, it cannot be intercepted, leaked in a provider breach, subpoenaed from a server, or sold. The trade-off is real: there is no automatic cross-device sync and no server-side recovery, so you are responsible for your own backups."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Does an offline expense tracker need an account or sign-up?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "It should not need one. An account exists so a server can identify you, and an app with no server has nothing to identify you to. Budgetify has no sign-up, no email, and no phone number: you install it and start."
+      }
+    }
+  ]
+}
+</script>
+</head>
+<body>
+<header class="topbar">
+  <div class="wrap">
+    <a class="brand" href="../">
+      <img class="brandmark" src="../assets/icon.png" alt="" width="26" height="26">
+      Budgetify
+    </a>
+    <nav class="topnav">
+      <a href="../faq/">FAQ</a>
+      <a href="../privacy-policy/">Privacy</a>
+      <a href="../data-deletion/">Delete data</a>
+    </nav>
+  </div>
+</header>
+
+<main class="wrap">
+  <p class="eyebrow">Budgetify · Offline tracking</p>
+  <h1>An offline expense tracker for India that works with no internet at all</h1>
+  <div class="divider"></div>
+
+  <p class="lede">Budgetify is an Android expense tracker that runs entirely on your phone. It reads
+  the bank and UPI transaction SMS you already receive, turns them into a categorised spending
+  picture, and never sends any of it anywhere — because it ships without Android's
+  <code>INTERNET</code> permission and physically cannot.</p>
+
+  <div class="callout">
+    <span class="pill">In one line</span>
+    <p>A free, account-free expense tracker for Android that tracks Indian bank and UPI spending
+    automatically from SMS, works with mobile data switched off, and has no technical ability to
+    upload your financial data. Available in six Indian languages.</p>
+  </div>
+
+  <h2>"Offline" means two very different things</h2>
+
+  <p>This is worth separating, because the word is used for both and only one of them is a guarantee.</p>
+
+  <p><strong>Offline-capable</strong> is the common meaning: the app works without a connection and
+  syncs later. Useful, but the app still holds full network access and is choosing when to use it.</p>
+
+  <p><strong>Offline by construction</strong> is the stricter one: the app has no network permission,
+  so there is nothing to sync and no choice being made. Android refuses the connection at the
+  operating-system level.</p>
+
+  <p>Budgetify is the second kind. You can
+  <a href="../no-internet-permission/">verify it yourself in under a minute</a> from the Play listing
+  or with <code>adb</code> — no need to take our word for it.</p>
+
+  <h2>What you give up, honestly</h2>
+
+  <p>An offline-only design is a genuine trade-off, and any page that only lists advantages is
+  selling you something:</p>
+
+  <table>
+    <thead>
+      <tr><th>You lose</th><th>What you get instead</th></tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td>Automatic sync across devices</td>
+        <td>An encrypted backup file you move yourself, on your own terms</td>
+      </tr>
+      <tr>
+        <td>Server-side account recovery</td>
+        <td>Nothing to breach, subpoena, or leak — there is no account and no server</td>
+      </tr>
+      <tr>
+        <td>Live exchange rates, bank logos fetched on demand, web dashboards</td>
+        <td>An app that works identically on a plane and never phones home</td>
+      </tr>
+      <tr>
+        <td>Automatic bank-balance fetching via account linking</td>
+        <td>No bank credentials to hand over to anyone, ever</td>
+      </tr>
+    </tbody>
+  </table>
+
+  <p>If cross-device sync matters more to you than architectural privacy, a cloud tracker is the
+  better fit and we would rather you picked one than were disappointed by this.</p>
+
+  <h2>What it does</h2>
+
+  <dl class="kv">
+    <dt>Automatic tracking from SMS</dt>
+    <dd>Reads bank and UPI transaction messages, extracting amount, date, merchant and account.
+    Matches against a built-in list of over 1,600 Indian bank sender IDs, understands TRAI's
+    <code>-S</code> / <code>-T</code> / <code>-P</code> routing suffixes, and drops promotional
+    messages, OTPs, statements and failed payments rather than logging them as spending.</dd>
+
+    <dt>Budgets and analytics</dt>
+    <dd>Monthly and per-category budget limits with threshold alerts, a category breakdown, a daily
+    spend curve, merchant analysis, and spending split by bank.</dd>
+
+    <dt>Planning</dt>
+    <dd>Savings goals, net worth with assets and liabilities, SIP and holdings tracking, recurring
+    payments with reminders for subscriptions, rent and EMIs, and tax-deduction tagging for
+    80C, 80D, 24(b) and HRA.</dd>
+
+    <dt>Shared expenses</dt>
+    <dd>A split and settle-up ledger where the other people are just names — nobody else needs to
+    install anything or create an account.</dd>
+
+    <dt>Your data, portable</dt>
+    <dd>Export to Excel, CSV, PDF or plain text at any time. Import CSV or Excel bank statements for
+    months your SMS history never covered. Backups are AES-256 encrypted with a passphrase only you
+    know.</dd>
+
+    <dt>Six languages</dt>
+    <dd>English, हिन्दी, मराठी, বাংলা, తెలుగు and தமிழ்.</dd>
+  </dl>
+
+  <h2>Common questions</h2>
+  <div class="faq">
+    <details>
+      <summary>Can an expense tracker really work with no internet connection?</summary>
+      <p>Yes — everything it needs is already on the phone. The transaction SMS your bank sends arrive over the mobile network, and summarising them is arithmetic. A connection is only needed if the app syncs to a server, serves ads, or runs analytics. Budgetify does none of those, so it behaves the same with mobile data off.</p>
+    </details>
+    <details>
+      <summary>Do I have to give it SMS access?</summary>
+      <p>No. SMS permission is what makes tracking automatic, but it is optional — deny it and Budgetify works as a manual expense tracker, where you add entries yourself. Everything else is unchanged.</p>
+    </details>
+    <details>
+      <summary>Does it work for cash spending too?</summary>
+      <p>Yes. Cash has no SMS to read, so those entries are added by hand and tracked alongside the automatic ones.</p>
+    </details>
+    <details>
+      <summary>Is it free?</summary>
+      <p>Yes, with no ads. Some advanced extras are offered as an optional paid upgrade through Google Play; the core tracking, budgets and analytics are free.</p>
+    </details>
+    <details>
+      <summary>Is there an iPhone version?</summary>
+      <p>No — Android only. iOS does not allow apps to read SMS, so the automatic tracking that makes Budgetify work is not possible there.</p>
+    </details>
+    <details>
+      <summary>What happens to my data if I uninstall it?</summary>
+      <p>It is deleted with the app, because it only ever existed on your phone. There is no copy on a server to request or wait for. See <a href="../data-deletion/">deleting your data</a>.</p>
+    </details>
+  </div>
+
+  <div class="callout">
+    <span class="pill">Get it</span>
+    <p><a href="https://play.google.com/store/apps/details?id=com.jayrk.budget_tracker">Budgetify on Google Play</a>
+    — free, no account, no ads. Or read how the
+    <a href="../sms-expense-tracker/">automatic SMS and UPI tracking</a> works.</p>
+  </div>
+</main>
+
+<footer class="site">
+  <div class="wrap">
+    <div>© 2026 Budgetify. Offline by design — your financial life is yours alone.</div>
+    <div class="fnav">
+      <a href="../faq/">FAQ</a>
+      <a href="../privacy-policy/">Privacy Policy</a>
+      <a href="../data-deletion/">Delete data</a>
+      <a href="mailto:budgetify.dev@gmail.com">Contact</a>
+    </div>
+  </div>
+</footer>
+</body>
+</html>
