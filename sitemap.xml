@@ -43,6 +43,12 @@
     <priority>0.5</priority>
   </url>
   <url>
+    <loc>https://budgetify.dev/terms-of-use/</loc>
+    <lastmod>2026-09-13</lastmod>
+    <changefreq>yearly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  <url>
     <loc>https://budgetify.dev/data-deletion/</loc>
     <lastmod>2026-08-09</lastmod>
     <changefreq>yearly</changefreq>
