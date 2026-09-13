@@ -3,10 +3,8 @@
 The public website for **Budgetify** — the answer pages, the FAQ, the Privacy
 Policy, and the data-deletion instructions.
 
-Split out of the app repository
-([Yolo-cell-hash/budgetify](https://github.com/Yolo-cell-hash/budgetify)),
-where it used to live in `docs/` and was served by GitHub Pages. The app's
-source stays there; this repo is only the site.
+Split out of the app's private repository, where it used to live in `docs/`
+and was served by GitHub Pages. This repo is only the site.
 
 ## What's here
 
